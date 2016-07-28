@@ -23,7 +23,7 @@ variable "zk_hosts" {
 }
 
 variable "ami_id" {
-  default = "ami-71069266"
+  default = "ami-1fdd4a08"
 }
 
 variable "instance_type" {
