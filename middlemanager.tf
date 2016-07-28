@@ -18,4 +18,5 @@ module "druid_middlemanager_sg" {
   source                     = "./base_sg"
   name                       = "druid-middlemanager"
   eb_port                    = "${var.middlemanager_eb_port}"
+  zk_elb_sec_group_id        = "${var.zk_elb_sec_group_id}"
 }

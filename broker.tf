@@ -18,4 +18,5 @@ module "druid_broker_sg" {
   source                    = "./base_sg"
   name                      = "druid-broker"
   eb_port                   = "${var.broker_eb_port}"
+  zk_elb_sec_group_id       = "${var.zk_elb_sec_group_id}"
 }

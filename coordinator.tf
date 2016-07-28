@@ -18,4 +18,5 @@ module "druid_coordinator_sg" {
   source                    = "./base_sg"
   name                      = "druid-coordinator"
   eb_port                   = "${var.coordinator_eb_port}"
+  zk_elb_sec_group_id       = "${var.zk_elb_sec_group_id}"
 }
