@@ -60,12 +60,57 @@ deploy:
           cd $WERCKER_ROOT
           zip -q --symlinks -r $(cat $WERCKER_ROOT/ARCHIVE_NAME) . || :
 
+    # broker
     - koding/eb-deploy@0.31.0:
         access-key: ${AWS_ACCESS_KEY_ID:-$TF_VAR_access_key}
         secret-key: ${AWS_SECRET_ACCESS_KEY:-$TF_VAR_secret_key}
         app-name: $EB_APP_NAME
         env-name: $EB_ENV_NAME
-        version-label: $(cat $WERCKER_ROOT/ARCHIVE_NAME)
+        version-label: broker-$(cat $WERCKER_ROOT/ARCHIVE_NAME)
+        region: $EB_ENV_REGION
+        s3-bucket: $EB_S3_BUCKET_PREFIX-$EB_ENV_REGION
+        s3-key: $(cat $WERCKER_ROOT/ARCHIVE_NAME)
+
+    # coordinator
+    - koding/eb-deploy@0.31.0:
+        access-key: ${AWS_ACCESS_KEY_ID:-$TF_VAR_access_key}
+        secret-key: ${AWS_SECRET_ACCESS_KEY:-$TF_VAR_secret_key}
+        app-name: $EB_APP_NAME
+        env-name: $EB_ENV_NAME
+        version-label: coordinator-$(cat $WERCKER_ROOT/ARCHIVE_NAME)
+        region: $EB_ENV_REGION
+        s3-bucket: $EB_S3_BUCKET_PREFIX-$EB_ENV_REGION
+        s3-key: $(cat $WERCKER_ROOT/ARCHIVE_NAME)
+
+    # historical
+    - koding/eb-deploy@0.31.0:
+        access-key: ${AWS_ACCESS_KEY_ID:-$TF_VAR_access_key}
+        secret-key: ${AWS_SECRET_ACCESS_KEY:-$TF_VAR_secret_key}
+        app-name: $EB_APP_NAME
+        env-name: $EB_ENV_NAME
+        version-label: historical-$(cat $WERCKER_ROOT/ARCHIVE_NAME)
+        region: $EB_ENV_REGION
+        s3-bucket: $EB_S3_BUCKET_PREFIX-$EB_ENV_REGION
+        s3-key: $(cat $WERCKER_ROOT/ARCHIVE_NAME)
+
+    # middlemanager
+    - koding/eb-deploy@0.31.0:
+        access-key: ${AWS_ACCESS_KEY_ID:-$TF_VAR_access_key}
+        secret-key: ${AWS_SECRET_ACCESS_KEY:-$TF_VAR_secret_key}
+        app-name: $EB_APP_NAME
+        env-name: $EB_ENV_NAME
+        version-label: middlemanager-$(cat $WERCKER_ROOT/ARCHIVE_NAME)
+        region: $EB_ENV_REGION
+        s3-bucket: $EB_S3_BUCKET_PREFIX-$EB_ENV_REGION
+        s3-key: $(cat $WERCKER_ROOT/ARCHIVE_NAME)
+
+    # realtime
+    - koding/eb-deploy@0.31.0:
+        access-key: ${AWS_ACCESS_KEY_ID:-$TF_VAR_access_key}
+        secret-key: ${AWS_SECRET_ACCESS_KEY:-$TF_VAR_secret_key}
+        app-name: $EB_APP_NAME
+        env-name: $EB_ENV_NAME
+        version-label: realtime-$(cat $WERCKER_ROOT/ARCHIVE_NAME)
         region: $EB_ENV_REGION
         s3-bucket: $EB_S3_BUCKET_PREFIX-$EB_ENV_REGION
         s3-key: $(cat $WERCKER_ROOT/ARCHIVE_NAME)
